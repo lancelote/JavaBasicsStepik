@@ -72,6 +72,59 @@ BigDecimal divisionResult = one.divide(new BigDecimal(powerOfTwo));
 
 ## 2.2. Преобразование типов
 
+### Неявное преобразование
+
+Многие преобразования типов можно выполнять неявно присваивая переменной с одним типом значение другого типа.
+
+### Явное приведение
+
+При потери точности:
+
+```
+int intValue = 1024;
+byte byteValue = (byte) intValue;  // 0 - отбрасываются лишние старшие биты
+
+double pi = 3.14;
+int intFromDouble = (int) pi;  // 3 - отбрасывается дробная часть
+
+float largeFloat = 1e20f;
+int intFromLargeFloat = (int) largeFloat;  // Максимальное представимое целое число
+
+double largeDouble = 1e100;
+float floatFromLargeDouble = (float) largeDouble;  // Бесконечность
+```
+
+### Автоматическое расширение
+
+При использовании бинарных арифметических или побитовых операторов:
+
+1. Если один из операндов `double`, то другой тоже будет к нему приведен
+2. Если один из операндов `float`, то оба приводятся к `float`
+3. Если один из операндов `long`, то оба приводятся к `long`
+4. Иначе оба приводятся к типу `int`
+
+### Классы-обертки
+
+- boolean - Boolean
+- byte - Byte
+- short - Short
+- int - Integer
+- long - Long
+- char - Character
+- float - Float
+- double - Double
+
+```
+int privitive = 0;
+Integer reference = Integer.valueOf(primitive);  // boxing
+int backToPrimitive = reference.intValue();      // unboxing
+```
+
+Нужны для:
+
+- Хранения примитивных типов в коллекциях
+- Нужно хранить факт отсутствия значения
+
 ## 2.3. Массивы и строки
 
 ## 2.4. Управляющие конструкции: условные операторы и циклы
