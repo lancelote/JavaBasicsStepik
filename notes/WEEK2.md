@@ -125,6 +125,30 @@ int backToPrimitive = reference.intValue();      // unboxing
 - Хранения примитивных типов в коллекциях
 - Нужно хранить факт отсутствия значения
 
+### Конвертация в строку и обратно
+
+```
+long fromString = Long.parseLong("12345");
+String fromLong = Long.toString(12345);
+String concatenation = "area" + 51;
+```
+
+### Полезные методы
+
+```
+short maxShortValue = Short.MAX_VALUE;
+
+int bitCount = Integer.bitCount(123);
+
+boolean isLetter = Character.isLetter('a');
+
+float floatInfinity = Float.POSITIVE_INFINITY;
+
+double doubleNaN = Double.NaN;
+
+boolean isNaN = Double.isNaN(doubleNaN);
+```
+
 ## 2.3. Массивы и строки
 
 ## 2.4. Управляющие конструкции: условные операторы и циклы
