@@ -151,4 +151,131 @@ boolean isNaN = Double.isNaN(doubleNaN);
 
 ## 2.3. Массивы и строки
 
+### Массивы
+
+```
+int[] numbers = new int[100];
+
+String[] args = new String[1];
+
+boolean bits[] = new boolean[0];
+```
+
+### Массив ненулевых значений
+
+```
+int[] numbers = new int[] {1, 2, 3, 4, 5};
+
+boolean[] bits = new boolean[] {true, false};
+
+// Можно опустить new и тип массива в variable declaration
+char[] digits = {'0', '1', '2', '3', '4', '5'};
+```
+
+### Работа с массивом
+
+```
+int[] numbers = {1, 2, 3, 4, 5};
+
+int arrayLength = numbers.length;
+
+int firstNumber = numbers[0];
+
+int lastNumber = numbers[arrayLength - 1];
+
+int indexOutOfBounds = numbers[5];
+```
+
+### Многомерные массивы
+
+```
+int [][] matrix1 = new int[2][2];
+int [][] matrix2 = {{1, 2}, {3, 4}};
+
+int[] fristRow = matrix2[0];      // Get firt row
+int someElement = matrix2[1][1];  // Get one element
+```
+
+### Ступенчатые массивы
+
+```
+int[][] triangle = {
+    {1, 2, 3, 4, 5},
+    {6, 7, 8, 9},
+    {10, 11, 12},
+    {13, 14},
+    {15}
+};
+
+int theSecondRowLength = triangle[1].length;
+```
+
+### Объявление метода, принимающего переменное число параметров
+
+```
+static int maxArray(int[] numbers) { ... };
+maxArray(new int[] {1, 2, 3});
+
+static int maxVarargs(int... numbers) { ... };
+maxVarargs(1, 2, 3);  // Компилятор сам упакует аргументы в массив
+```
+
+### Сравнение двух массивов
+
+```
+import Java.util.Arrays;
+
+int[] a = {1, 2, 3};
+int[] b = {4, 5, 6};
+
+boolean equals1 = a == b;                  // Сравнение ссылок - ссылаются ли на один и тот же объект
+boolean equals2 = a.equals(b);             // Для массивов также сравнивает ссылки
+boolean equals3 = Array.equals(a, b);      // Хорошо работает для одномерных массивов
+boolean equals4 = Array.deepEquals(a, b);  // Решение для многомернх массивов
+```
+
+### Распечатка массива
+
+```
+int[] a = {1, 2, 3};
+
+// Плохой метож
+System.out.println(a);
+
+// Работает с одномерными массивами
+System.out.println(Arrays.toString(a));
+
+// Работает с многомерными массивами
+System.out.println(Arrays.deepToString(a));
+```
+
+### Строки
+
+```
+String hello = "Hello";
+String specialChars = "\r\n\t\"\\";
+String empty = "";
+
+char[] charArray = {'a', 'b', 'c'};
+String string = new String(charArray);
+char[] charsFromString = string.toCharArray();
+
+// Строка не должны заканчиваться нулевым символом
+String zeros = "\u0000\u0000";
+```
+
+### Неизменяемость строк
+
+```
+String s = "stringIsImmutable";
+
+int length = s.length();
+
+char firstChar = s.charAt(0);
+
+boolean endsWithTable = s.endsWith("table");
+
+boolean containsIs = s.contains("Is");
+```
+
 ## 2.4. Управляющие конструкции: условные операторы и циклы
