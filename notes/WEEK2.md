@@ -276,6 +276,39 @@ char firstChar = s.charAt(0);
 boolean endsWithTable = s.endsWith("table");
 
 boolean containsIs = s.contains("Is");
+
+String substring = s.substring(0, 6);
+
+String afterReplace = s.replace("Imm", "M");
+
+String allCapitals = s.toUpperCase();
+```
+
+Соединение двух строк также создает новую:
+
+```
+String hello = "Hello ";
+String world = "world!";
+String helloWorld = hello + world;
+```
+
+Что эквивалентно:
+
+```
+StringBuilder sb = new StringBuilder();
+sb.append(hello);
+sb.append(world);
+String helloWorld = sb.toString();
+```
+
+### Сравнение строк
+
+Нужно делать через метод, чтобы не проверять ссылки на один объект:
+
+```
+boolean contentEquals = s1.equals(s2);
+
+boolean contentEqualsIgnoreCase = s1.equalsIgnoreCase(s2);
 ```
 
 ## 2.4. Управляющие конструкции: условные операторы и циклы
