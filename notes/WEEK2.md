@@ -328,3 +328,96 @@ if (weatherIsGood) {
 ```
 System.out.println("Weather is " + (weatherIsGood ? "good" : "bad"));
 ```
+
+### Оператор switch
+
+```
+switch (digit) {
+    case 0:
+        text = "zero";
+        break;
+    
+    case 1:
+        text = "one";
+        break;
+    
+    // ...
+    
+    default:
+        text = "???";
+}
+```
+
+### Цикл while
+
+```
+while (haveTime() && haveMoney()) {
+    goShopping();
+}
+```
+
+### Цикл do while
+
+```
+do {
+    goShopping();
+} while (haveTime() && haveMoney());
+```
+
+### Цикл for
+
+```
+for (int i = 0; i < args.length; i++) {
+    System.out.println(args[i]);
+}
+```
+
+### Цикл foreach
+
+```
+for (String arg : args) {
+    System.out.println(arg);
+}
+```
+
+### Оператор break
+
+```
+boolean found = false;
+
+for (String element : haystack) {
+    if (needle.equals(element)) {
+        found = true;
+        break;
+    }
+}
+```
+
+### Оператор continue
+
+```
+int count = 0;
+
+for (String element : haystack) {
+    if (!needle.equals(element)) {
+        continue;
+    }
+    count++;
+}
+```
+
+### Метки
+
+```
+boolean found = false;
+
+outer:
+for (int[] row : matrix) {
+    for (int x : row) {
+        if (x > 100) {
+            found = true;
+            break outer;
+        }
+    }
+}
+```
