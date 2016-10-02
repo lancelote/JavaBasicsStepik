@@ -5,6 +5,7 @@
 ## TOC
 
  - [x] [Week 1 - Java Intro](notes/WEEK1.md)
+    - [1.2 Первый контакт](notes/WEEK1.md#12-Первый-контакт)
  - [x] [Week 2 - Базовый синтаксис Java](notes/WEEK2.md)
  - [ ] Week 3 - Объекты, классы и пакеты в Java
  - [ ] Week 4 - Обработка ошибок, исключения, отладка
