@@ -183,7 +183,7 @@ public final class Integer {
 
 В классе может быть несколько методов с одинаковыми именами, но разным набором параметров:
 
-```java
+```
 package java.lang;
 
 public final class String {
@@ -258,7 +258,7 @@ for (DayOfWeek day : DayOfWeek.values()) {
 
 ### Аннотации
 
-```java
+```
 package java.lang;
 
 public final class Character {
@@ -272,5 +272,74 @@ public final class Character {
 ```
 
 ## 3.4. Наследование. Класс Object
+
+Пример с геометрическими фигурами: [gitgist](https://gist.github.com/anonymous/4d90331db876ce843e4cc48a27964d84).
+
+Унаследоваться можно только от одного класса.
+
+```java
+package java.lang;
+
+public final class BigDecimal extends Number {
+    public int intValue() {}
+    
+    // No shortValue() method,
+    // it's inherited from Number
+}
+```
+
+### Переопределение
+
+Возвращаемое значени подкласса должно быть того же класса что и оригинал или быть его подкласса.
+
+```java
+package java.lang;
+
+public final class StringBuilder extends AbstractStringBuilder {
+    @Override
+    public StringBuilder append(String str) {}
+    
+    // Base method in AbstractStringBuilder:
+    // AbstractStringBuilder append(String str)
+}
+```
+
+### Конструкторы
+
+Создание экземпляра класса наследника всегда включает вызов конструктора родителя. Если у конструктора нет параметров,
+то компилятор сам подставит вызов родительского конструктора первой строчкой в конструктор наследника, в противном
+случае нужно сделать все это руками:
+
+```java
+package java.lang;
+
+public final class StringBuilder extends AbstractStringBuilder {
+    public StringBuilder() {
+        super(16);
+    }
+    
+    @Override
+    public StringBuilder append(String str) {
+        super.append(str);  // Вызов оригинального метода
+        return this;
+    }
+}
+```
+
+Использование ключевого слова `super` разрешено только к теле класса наследника.
+
+### Наследование по умолчанию
+
+```java
+package java.lang;
+
+public final class String /* extends object */ {}
+```
+
+### Liskov Substitution Principle
+
+Если S является подтипом T, то все объекты базового класса T в программе могут быть заменены на объекты класса S,
+без изменения каких-либо желательных свойств программы. Другими словами поведение подтипов не должно противоречить
+поведению базового класса.
 
 ## 3.5. Абстрактные классы и интерфейсы
