@@ -17,14 +17,19 @@ public class ComplexNumberTest {
     }
 
     @Test
-    public void equals() throws Exception {
-        assertEquals(a, b);
-        assertNotEquals(a, c);
-        assertNotEquals(b, c);
+    public void testEquals() throws Exception {
+        assertTrue(a.equals(b));
+        assertTrue(b.equals(a));
+        assertFalse(a.equals(c));
+        assertFalse(b.equals(c));
+        assertFalse(c.equals(a));
+        assertFalse(c.equals(b));
     }
 
     @Test
-    public int hashCode() throws Exception {
-
+    public void testHashCode() throws Exception {
+        assertEquals(a.hashCode(), b.hashCode());
+        assertNotEquals(a.hashCode(), c.hashCode());
+        assertNotEquals(b.hashCode(), c.hashCode());
     }
 }

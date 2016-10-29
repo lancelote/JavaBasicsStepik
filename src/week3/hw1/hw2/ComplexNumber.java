@@ -1,7 +1,5 @@
 package week3.hw1.hw2;
 
-import java.util.Objects;
-
 /**
  * Дан класс ComplexNumber. Переопределите в нем методы equals() и hashCode() так, чтобы equals() сравнивал экземпляры
  * ComplexNumber по содержимому полей re и im, а hashCode() был бы согласованным с реализацией equals().
@@ -24,18 +22,15 @@ public final class ComplexNumber {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof ComplexNumber))
-            return false;
-        ComplexNumber other = (ComplexNumber) obj;
-        return Double.compare(this.getRe(), other.getRe()) == 0 &&
-                Double.compare(this.getIm(), other.getIm()) == 0;
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-//    @Override
-//    public int hashCode() {
-//        return 1;
-//    }
+        ComplexNumber that = (ComplexNumber) o;
+
+        return Double.compare(that.re, re) == 0 && Double.compare(that.im, im) == 0;
+
+    }
 
     @Override
     public int hashCode() {
