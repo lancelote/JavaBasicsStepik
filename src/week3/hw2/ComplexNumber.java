@@ -1,4 +1,4 @@
-package week3.hw1.hw2;
+package week3.hw2;
 
 /**
  * Дан класс ComplexNumber. Переопределите в нем методы equals() и hashCode() так, чтобы equals() сравнивал экземпляры

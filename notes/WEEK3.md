@@ -343,3 +343,165 @@ public final class String /* extends object */ {}
 поведению базового класса.
 
 ## 3.5. Абстрактные классы и интерфейсы
+
+Класс может соответствовать и абстрактному понятию. Для выражения этой концепции используется ключевое слово
+`abstract`:
+
+```
+public abstract class Shape {
+    
+    private final Color color;
+    
+    public Shape(Color color) {
+        this.color = color;
+    }
+    
+    public Color getColor() {
+        return color;
+    }
+    
+    public double getArea() {
+        return Double.NaN;
+    }
+    
+}
+```
+
+Для абстрактного класса нельзя создавать экземпляры. У абстрактного класса могут быть абстрактные методы (без
+реализации):
+
+```
+public abstract class Shape {
+    ...
+    
+    public abstract double getArea();
+```
+
+### Интерфейс
+
+Альтернатива абстрактному классу, в котором все методы публичные и абстрактные.
+
+```
+public interface OrderService {
+    Order[] getOrdersByClient(long clientId);
+}
+```
+
+Для обратной совместимости в интерфейсы добавлена возможность реализации default-методов:
+
+```java
+package org.stepic.java.orders;
+
+import java.time.LocalDate;
+
+public interface OrderService {
+    
+    Order[] getOrdersByClient(long clientId);
+    
+    // Добавление этого метода сломает компиляцию в унаследованных классах, где не будет его реализации
+    // Order[] getOrdersByClient(long clientId, LocalDate date);
+    
+    default Order[] getOrdersByClient(long clientId, LocalDate date) {
+        Order[] allOrders = getOrdersByClient(clientId);
+        return Orders.filterByDate(allOrders, date);
+    }
+}
+```
+
+Реалиация интерфейса:
+
+```
+public class OrderServiceImpl
+        extends ServiceBase
+        implements OrderService {
+    
+    public Order[] getOrdersByClient(long clientId) {
+        ...
+    }
+
+}
+```
+
+В стандартной библиотеки присутствует большое число интерфейсов.
+
+#### Functional Interface
+
+Интерфейс с единственным абстрактным методом:
+
+```
+package java.lang;
+
+@FunctionalInterface
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+}
+```
+
+Пример использования:
+
+```
+package org.stepic.java.timer;
+
+public class Timer {
+    
+    public long measureTime(Runnable runnable) {
+        long startTime = Sytem.currentTimeMillis();
+        runnable.run();
+        return System.currentTimeMillis() - startTime();
+    
+}
+```
+
+Главная программа:
+
+```
+package org.stepic.java.timer;
+
+import java.math.BigDecimal;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        Timer timer = new Timer();
+        long time = timer.measureTime(new BigDecimalPower());
+        System.out.println(time);
+    }
+    
+    private static class BigDecimalPower implements Runnable {
+        
+        @Override
+        public void run() { new BigDecimal("1234567").pow(10000); }
+        
+    }
+    
+}
+```
+
+Упрощенно с ссылкой на метод:
+
+```
+public class Main {
+    
+    public static void main(String[] args) {
+        Timer timer = new Timer();
+        long time = timer.measureTime(Main::bigDecimalPower);
+        System.out.println(time);
+    }
+    
+    private static void bigDecimalPower {
+        new BigDecimal("1234567").pow(10000);
+    }
+    
+}
+```
+
+Упрощенно с lambda:
+
+```
+public class Main {
+
+    public static void main(String[] args) {
+        Timer timer = new Timer;
+        long time = timer.measureTime(() -> new BigDecimal("1234567").pow(10000));
+        System.out.println(time);
+```

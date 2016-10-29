@@ -1,7 +1,8 @@
-package week3.hw1.hw2;
+package week3.hw2;
 
 import org.junit.Before;
 import org.junit.Test;
+import week3.hw2.ComplexNumber;
 
 import static org.junit.Assert.*;
 
