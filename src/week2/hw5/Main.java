@@ -5,12 +5,7 @@ package week2.hw5;
  * на расстоянии a.
  */
 public class Main {
-    public static void main(String[] args) {
-        System.out.println(charExpression(32));  // |
-        System.out.println(charExpression(29));  // y
-    }
-
-    private static char charExpression(int a) {
+    static char charExpression(int a) {
         return (char) ('\\' + a);
     }
 }

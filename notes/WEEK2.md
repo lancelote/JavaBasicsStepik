@@ -116,6 +116,21 @@ BigDecimal divisionResult = one.divide(new BigDecimal(powerOfTwo));
 
 Многие преобразования типов можно выполнять неявно присваивая переменной с одним типом значение другого типа.
 
+```
+byte byteValue = 123;
+short shortValue = byteValue;
+int intValue = byteValue;
+long longValue = byteValue;
+
+char charValue = '@';
+int intFromChar = charValue;
+long longFromChar = charValue;
+
+float floatFromLong = longValue;
+double doubleFromFloat = floatFromLong;
+double doubleFromInt = intValue;
+```
+
 ### Явное приведение
 
 При потери точности:
@@ -142,6 +157,18 @@ float floatFromLargeDouble = (float) largeDouble;  // Бесконечность
 2. Если один из операндов `float`, то оба приводятся к `float`
 3. Если один из операндов `long`, то оба приводятся к `long`
 4. Иначе оба приводятся к типу `int`
+
+### Неявное приведение
+
+```
+byte a = 1;
+a += 3
+// a = (byte) (a + 3);
+
+byte b = -1;
+b >>>= 7;
+// b = (byte) (b >>> 7);
+```
 
 ### Классы-обертки
 
