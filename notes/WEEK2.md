@@ -12,6 +12,25 @@
 
 Ссылка может быть пустой, для этого переменной присваивается значение `null`
 
+### boolean
+
+В Java поддерживается 4 операции с `boolean`:
+
+ - "не" - `boolean haveSpareTime = !isBusy;`
+ - "и" - `boolean canGoToPark = haveSpareTime &&  weatherIsGood;`
+ - "или" - `boolean hadGoodTime = learnedJavaOnStepik || wentToPark;`
+ - "исключающее или" - `boolean tastesGood = addedKetchup ^ addedHoney;`
+ 
+Вычисление по полной схеме для "и" и "или" доступно через операторы `&` и `|`.
+
+Сокращенный вид записи (использует полную схему вычисления):
+
+```
+value &= expression;
+value |= expression;
+value ^= expression;
+```
+
 ### Целочисленные типы
 
  - `byte` - 8 бит, диапазон -128..+127

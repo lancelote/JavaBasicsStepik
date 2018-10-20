@@ -17,19 +17,9 @@ package week2.hw1;
  * Совет тем, у кого не проходит какой-то из тестов. В данной задаче возможно всего 16 комбинаций значений входных
  * параметров. Их можно выписать на бумажку, посчитать для них правильные ответы и сравнить с тем, что выдает ваше
  * решение. Попробуйте самостоятельно проделать это, найти ошибку и исправить решение.
- *
- *
  */
 public class Main {
-    public static void main(String[] args) {
-        System.out.println(booleanExpression(false, false, false, false));  // false
-        System.out.println(booleanExpression(true, true, true, true));      // false
-        System.out.println(booleanExpression(false, false, true, true));    // true
-        System.out.println(booleanExpression(true, true, false, false));    // true
-        System.out.println(booleanExpression(true, true, true, false));     // false
-    }
-
-    private static boolean booleanExpression(boolean a, boolean b, boolean c, boolean d) {
+    static boolean booleanExpression(boolean a, boolean b, boolean c, boolean d) {
         return ((a ^ b) && (c ^ d)) || ((a && b) && !(c || d)) || (!(a || b) && (c & d));
     }
 }
