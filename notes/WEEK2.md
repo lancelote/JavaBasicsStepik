@@ -38,6 +38,17 @@ value ^= expression;
  - `int` - 32 бит, диапазон -2^31..+2^31-1
  - `long` - 64 бит, диапазон -2^63..+2^63-1
 
+Разные способы записи:
+
+```
+int decimal = 99;
+int octal = 0755;
+int hex = 0xFF;
+int binary = 0b101;
+int tenMillion = 10_000_000;
+int tenBillion = 10_000_000_000L;
+```
+
 ### char
 
  - `char` - 16 бит, беззнаковый, 0..2^16 - 1

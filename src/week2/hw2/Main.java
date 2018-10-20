@@ -13,13 +13,7 @@ package week2.hw2;
  * надо придумать и записать несложную формулу, использующую только арифметические операторы.
  */
 public class Main {
-    public static void main(String[] args) {
-        System.out.println(leapYearCount(1));    // 0
-        System.out.println(leapYearCount(4));    // 1
-        System.out.println(leapYearCount(100));  // 24
-    }
-
-    private static int leapYearCount(int year) {
+    static int leapYearCount(int year) {
         return year / 4 - year / 100 + year / 400;
     }
 }
