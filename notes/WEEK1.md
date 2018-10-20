@@ -31,7 +31,7 @@
 
 Через флаг `-classpath` можно задать путь до скомпилированной программы
 
-Запуск программы со сторонними классами: `java -classpath lib.jar;hw.jar HelloWorld`
+Запуск программы со сторонними классами: `java -classpath lib.jar:hw.jar HelloWorld`
 
 ### Работа с jar-архивами
 
