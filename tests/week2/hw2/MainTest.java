@@ -1,13 +1,15 @@
 package week2.hw2;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class MainTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class MainTest {
+
     @Test
-    public void leapYearCount() {
-        Assert.assertEquals(0, Main.leapYearCount(1));
-        Assert.assertEquals(1, Main.leapYearCount(4));
-        Assert.assertEquals(24, Main.leapYearCount(100));
+    void leapYearCount() {
+        assertEquals(0, Main.leapYearCount(1));
+        assertEquals(1, Main.leapYearCount(4));
+        assertEquals(24, Main.leapYearCount(100));
     }
 }

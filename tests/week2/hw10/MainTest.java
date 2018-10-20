@@ -1,12 +1,12 @@
 package week2.hw10;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MainTest {
+class MainTest {
     @Test
-    public void printTextPerRole() throws Exception {
+    void printTextPerRole() {
         String[] roles = new String[] {
                 "Городничий",
                 "Аммос Федорович",

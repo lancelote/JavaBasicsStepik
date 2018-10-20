@@ -70,6 +70,16 @@ float floatWithSuffix = 36.6f;
 double doubleWithSuffix = 36.6d;
 ```
 
+Способы записи:
+
+```
+double simple = -1.234;
+double exponential = -123.4e-2;
+double hex = 0x1.Fp10;
+float floatWithSuffix = 36.6f;
+double withSuffix = 4d;
+```
+
 Особые случаи:
 ```
 double positiveInfinity = 1.0 / 0.0;
