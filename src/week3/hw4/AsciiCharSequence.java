@@ -1,5 +1,7 @@
 package week3.hw4;
 
+import java.util.Arrays;
+
 /**
  * Напишите класс AsciiCharSequence, реализующий компактное хранение последовательности ASCII-символов
  * (их коды влезают в один байт) в массиве байт. По сравнению с классом String, хранящим каждый символ как char,
@@ -21,30 +23,27 @@ public class AsciiCharSequence implements CharSequence {
 
     private byte[] bytes;
 
-    public AsciiCharSequence(byte[] bytes) {
+    AsciiCharSequence(byte[] bytes) {
         this.bytes = bytes;
     }
 
     @Override
     public int length() {
-        return this.bytes.length;
+        return bytes.length;
     }
 
     @Override
     public char charAt(int index) {
-        return (char) this.bytes[index];
+        return (char) bytes[index];
     }
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        int length = end - start;
-        byte[] bytes = new byte[length];
-        System.arraycopy(this.bytes, start, bytes, 0, length);
-        return new AsciiCharSequence(bytes);
+        return new AsciiCharSequence(Arrays.copyOfRange(bytes, start, end));
     }
 
     @Override
     public String toString() {
-        return new String(this.bytes);
+        return new String(bytes);
     }
 }
