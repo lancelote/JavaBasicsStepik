@@ -83,6 +83,13 @@ public class ModifiedDemo {
 }
 ```
 
+- `public` - разрешен доступ отовсюду без ограничений
+- `protecterd` - доступ разрешен только для классов наследников и для классов текущего пакета
+- отсутствие модификатора - доступ только в пределах пакета
+- `private` - доступ только в пределах класса
+
+`protected` и `pivate` не пременимы к классам верхнего уровня.
+
 ## 3.3. Объявления класса
 
 ```java
@@ -210,6 +217,27 @@ public final class Integer {
     }
 }
 ```
+
+### Вложенные классы
+
+```java
+package java.util;
+
+public class ArrayList<E> {
+    
+    Object[] elementData;
+    
+    public Iterator<E> iterator() {
+        return new Itr();
+    }
+    
+    private class Itr implements Iterator<E> {
+        int cursor;
+    }
+}
+```
+
+Вложенный класс, объявленный с модификатором `static` теряет возможность обращаться к нестатическим членам внешнего класса.
 
 ### Перечисления
 
@@ -401,6 +429,7 @@ public interface OrderService {
     // Добавление этого метода сломает компиляцию в унаследованных классах, где не будет его реализации
     // Order[] getOrdersByClient(long clientId, LocalDate date);
     
+    // Будет использоваться для классов наследников, где не переопределен
     default Order[] getOrdersByClient(long clientId, LocalDate date) {
         Order[] allOrders = getOrdersByClient(clientId);
         return Orders.filterByDate(allOrders, date);

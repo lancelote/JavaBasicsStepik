@@ -19,7 +19,8 @@ import java.util.function.DoubleUnaryOperator;
  * должен возвращать значение 10.
  */
 public class Main {
-    public static double integrate(DoubleUnaryOperator f, double a, double b) {
+    @SuppressWarnings("SameParameterValue")
+    static double integrate(DoubleUnaryOperator f, double a, double b) {
         double result = 0;
         for (; a < b; a += Math.pow(10, -6)) {
             result += f.applyAsDouble(a)*Math.pow(10, -6);
