@@ -33,8 +33,7 @@ package week2.hw10;
  *     - будьте внимательны, не добавляйте лишних пробелов в конце строк.
  */
 public class Main {
-    @SuppressWarnings("WeakerAccess")
-    public static String printTextPerRole(String[] roles, String[] textLines) {
+    static String printTextPerRole(String[] roles, String[] textLines) {
         StringBuilder result = new StringBuilder();
 
         for (String role : roles) {
