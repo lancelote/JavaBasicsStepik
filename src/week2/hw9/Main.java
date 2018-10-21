@@ -17,8 +17,7 @@ public class Main {
      * @param a2 second sorted array
      * @return new array containing all elements from a1 and a2, sorted
      */
-    @SuppressWarnings("WeakerAccess")
-    public static int[] mergeArrays(int[] a1, int[] a2) {
+    static int[] mergeArrays(int[] a1, int[] a2) {
         int[] result = new int[a1.length + a2.length];
         int i = 0, j = 0;
 
