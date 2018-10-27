@@ -242,3 +242,76 @@ System.out.println(string);
 Можно также воспользоваться `Objects.toString(object)` из `java.util`, который реализует туже логику.
 
 ## 4.3. Логирование
+
+### Пример
+
+```
+package org.stepik.java.logging;
+
+import java.util.logging.*;
+
+public class LogDemo {
+    
+    private static final Logger LOGGER = Logger.getLogger(LogDemo.class.getName());
+}
+```
+
+### Логирование сообщений
+
+```
+LOGGER.log(Level.INFO, "I'm logging");
+
+// SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
+
+LOGGER.warning("We have a problem!);
+```
+
+### Настройка уровня логирования
+
+```
+LOGGER.setLevel(Level.WARNING);
+```
+
+### Добавление в сообщение дополнительной информации
+
+```
+LOGGER.log(Level.FINEST, "Current value of x is " + x);
+LOGGER.log(Level.FINEST, "Current value of x is {0}", x);
+LOGGER.log(Level.FINEST, "Point coordinates are ({0}, {1})", new Object[] {x, y});
+LOGGER.log(Level.SEVERE, "Unexpected exception", e);
+```
+
+### Обработчики сообщений
+
+Определяют куда будет записано сообщение.
+
+- `java.util.logging.ConsoleHandler`
+- `java.util.logging.FileHandler`
+- `java.util.logging.SocketHandler`
+
+### Форматеры сообщений
+
+Определяют формат вывода.
+
+- `java.util.logging.SimpleFormatter`
+- `java.util.logging.XMLFormatter`
+
+### Полный пример
+
+```
+Logger logger = Logger.getLogger(Stepik.class.getName());
+Handler handler;
+try {
+    handler = new FileHandler("log.xml");
+} catch (Exception e) {
+    handler = new ConsoleHandler();
+}
+Formatter formatter = new XMLFormatter();
+
+handler.setFormatter(formatter);
+handler.setLevel(Level.WARNING);
+logger.addHandler(handler);  
+    
+logger.log(Level.INFO, "test info");
+logger.log(Level.WARNING, "test warning"); // Выводится в файл
+```
