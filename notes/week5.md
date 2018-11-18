@@ -440,4 +440,228 @@ try (InflaterInputStream iis = new InflaterInputStream(new ByteArrayInputStream(
 
 ## 5.3. Потоки символов
 
+- Ввод данных `java.io.Reader`
+- Вывод данных `java.io.Writer`
+
+### `java.io.Reader`
+
+```
+package java.io;
+
+public abstract class Reader implements Readable, Closeable {
+
+    public int read() throws IOException {}
+    
+    public int read(char cbuf[]) throws IOException {
+        return read(cbuf, 0, cbuf.length)
+    }
+    
+    public abstract int read(char cbuf[], int off, int len) throws IOException;
+    
+    public long skip(long n) throws IOException {}
+    
+    public abstract void close() throws IOException;
+}
+```
+
+- `read` также возвращает `int`, но рассматривать нужно уже 2 младших байта
+
+### `java.io.Writer`
+
+```
+package java.io;
+
+public abstract class Writer implements Appendable, Closeable, Flushable {
+    
+    public void write(int c) throws IOException {}
+    
+    public void write(char cbuf[]) throws IOException {
+        write(cbuf, 0, cbuf.length);
+    }
+    
+    public abstract void write(char cbuf[], int off, int len) throws IOException;
+    
+    public abstract void flush() throws IOException;
+    
+    public abstract void close() throws IOException;
+}
+```
+
+- Имеет перегруженные методы `write` принимающие строку
+
+### Превращание потока байт в поток символов
+
+```
+Reader reader = new InputStreamReader(inputStream, "UTF-8");
+
+Charset charset = StandardCharsets.UTF_8;
+Writer writer = new OutputStreamWriter(outputStream, charset);
+```
+
+- Кодировка передается либо строкой, либо объектом типа `Charset`
+- `Charset` находится в пакете `java.nio.charset`
+- Получить дефолтную кодировку системы можно через `Charset.defaultCharset()`
+
+### Чтение и запись тектовых файлов
+
+```
+Reader reader1 = new FileReader("int.txt");
+Writer writer1 = new FileWriter("out.txt");
+
+Reader reader2 = new InputStreamReader(new FileInputStream("in.txt"), StandardCharsets.UTF_8);
+Writer writer2 = new OutputStreamWriter(new FileOutputStream("out.txt"), StandardCharsets.UTF_8);
+```
+
+### Чтение/запись из/в массива или строки в памяти
+
+```
+Reader reader1 = new CharArrayReader(new char[] {'a', 'b', 'c'});
+Reader reader2 = new StringReader("Hello World!");
+
+CharArrayWriter writer1 = new CharArrayWriter();
+writer1.write("Test");
+char[] resultArray = writer1.toCharArray();
+
+StringWriter writer2 = new StringWriter();
+writer2.write("Test");
+String resultString = writer2.toString();
+```
+
+### Буферизация чтения
+
+```
+package java.io;
+
+public class BufferReader extends Reader {
+
+    public BufferedReader(Reader in) {}
+    
+    public String readLine() throws IOException {}
+}
+```
+
+- Хоть мы и читаем символы по одному, однако `BufferReader` запрашивает у низлежащего потока сразу большие блоки и хранит их в буффере
+- Повышает производительность в случае больших объемов данных
+- `readLine` читает из потока целую строку до ближайшего символа конца строки, сам символ переноса строки не возвращается
+- `readLine` возвращает `null` в случае конца потока
+
+### Чтение файла построчно
+
+```
+try (BufferedReader reader = Files.newBufferedReader(Paths.get("in.txt"), StandardCharsets.UTF_8)) {
+    String line;
+    while ((line = reader.readLine()) != null) {
+        // process line
+    }
+}
+```
+
+Если файл не большой:
+
+```
+List<String> lines Files.readAllLines(Paths.get("in.txt"), StandardCharsets.UTF_8);
+
+for (String line : lines) {
+    // process line
+}
+```
+
+### Запись файла построчно
+
+```
+try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("out.txt"), StandardCharsets.UTF_8)) {
+    writer.write("Hello");
+    writer.newLine();  // Разделитель строк на текущей платформе
+}
+```
+
+Если файл не большой:
+
+```
+List<String> lines = Arrays.asList("Hello", "world");
+
+Files.write(Paths.get("out.txt"), lines, StandardCharsets.UTF_8);
+```
+
+### Форматированный ввод-вывод разных типов
+
+#### Вывод
+
+```
+package java.io;
+
+public class PrintWriter extends Writer {
+    
+    public PrintWriter (Writer out) {}
+    
+    public void print(int i) {}
+    
+    public void println(Object obj) {}
+    
+    public PrintWriter printf(String format, Object ... args) {}
+    
+    public boolean checkError() {}
+}
+```
+
+- `IOException` не бросается
+- Внутренний флаг ошибки можно проверить с помощью метода `checkError`
+
+```
+package java.io;
+
+public class PrintStream extends FilterOutputStream implements Appendable, Closeable {
+
+    public PrintStream(OutputStream out) {}
+    
+    public void print(int i) {}
+    
+    public void println(Object obj) {}
+    
+    public PrintWriter printf(String format, Object ... args) {}
+    
+    public boolean checkError() {}
+}
+```
+
+#### Ввод (старый)
+
+```
+// java.io.StreamTokenizer
+StreamTokenizer streamTokenizer = new StreamTokenizer(new StringReader("Hello world"));
+
+// java.util.StringTokenizer
+StringTokenizer stringTokenizer = new StringTokenizer("Hello world");
+```
+
+#### Ввод (новый)
+
+```
+Reader reader = new StringReader("abc|true|1,1e3|-42");
+
+Scanner scanner = new Scanner(reader)
+        .useDelimiter("\\|")
+        .useLocale(Locale.forLanguageTag("ru"));
+
+String token = scanner.next();
+bookean bool = scanner.nextBoolean();
+double dbl = scanner.nextDouble();
+int integer = scanner.nextInt();
+```
+
+### Стандартные потоки
+
+```
+package java.lang;
+
+public final class System {
+
+    public static final InputStream in = null;
+    
+    public static final PrintStream out = null;
+    
+    public static final PrintStream err = null;
+}
+```
+
 ## 5.4. Продвинутые возможности
